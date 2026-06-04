@@ -42,10 +42,20 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          async sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
+            const items = await defaultSidebarItemsGenerator(args);
+            function sortFintech(nodes) {
+              return nodes.map(node => {
+                if (node.type !== 'category') return node;
+                const children = sortFintech(node.items ?? []);
+                if (node.label?.toLowerCase() === 'fintech') {
+                  return {...node, items: [...children].reverse()};
+                }
+                return {...node, items: children};
+              });
+            }
+            return sortFintech(items);
+          },
         },
         blog: false,
         theme: {
