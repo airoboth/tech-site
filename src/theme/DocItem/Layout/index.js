@@ -98,9 +98,11 @@ function PasswordGate({ children }) {
 
 export default function LayoutWrapper(props) {
   const location = useLocation();
-  const isFintechPage = location.pathname.includes('/fintech/');
+  const isProtected =
+    location.pathname.includes('/fintech/') ||
+    location.pathname.includes('/daily_report/');
 
-  if (isFintechPage) {
+  if (isProtected) {
     return (
       <PasswordGate>
         <Layout {...props} />
