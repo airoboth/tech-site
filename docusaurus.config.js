@@ -48,7 +48,8 @@ const config = {
               return nodes.map(node => {
                 if (node.type !== 'category') return node;
                 const children = sortFintech(node.items ?? []);
-                if (node.label?.toLowerCase() === 'fintech') {
+                const label = node.label?.toLowerCase();
+                if (label === 'fintech' || label === 'daily_report') {
                   return {...node, items: [...children].reverse()};
                 }
                 return {...node, items: children};
