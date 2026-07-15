@@ -100,7 +100,8 @@ export default function LayoutWrapper(props) {
   const location = useLocation();
   const isProtected =
     location.pathname.includes('/fintech/') ||
-    location.pathname.includes('/daily_report/');
+    location.pathname.includes('/daily_report/') ||
+    location.pathname.includes('/technical_analysis/');
 
   if (isProtected) {
     return (
