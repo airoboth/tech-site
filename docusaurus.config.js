@@ -49,7 +49,7 @@ const config = {
                 if (node.type !== 'category') return node;
                 const children = sortFintech(node.items ?? []);
                 const label = node.label?.toLowerCase();
-                if (label === 'fintech' || label === 'daily_report') {
+                if (label === 'fintech' || label === 'daily_report' || label === 'technical_analysis') {
                   return {...node, items: [...children].reverse()};
                 }
                 return {...node, items: children};
